@@ -1,0 +1,70 @@
+---
+title: My dynamic report
+output: html_fragment
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo=FALSE, message=FALSE, warning=FALSE, error=FALSE)
+
+```
+
+```{css}
+body {
+  color: #4F7888;
+  background-color: #FFFDF2;
+  font-family: 'Verdana'
+```
+
+## Residential Cat Interaction Data
+### How many unique cats are in the local area? How often are they pet?
+
+This experiment aims to evaluate, on a rough average, how many residential cats there are in the area. It is also analysed how many of these cats were pet, with a main focus on if people have an enjoyable experience with neighborhood felines.
+
+From the data that was collected, two graphs were produced.
+
+The data of fig.1 represents how many unique cats were pet on one instance of travel (x-axis) and how many times this amount of unique cats were pet (y-axis).
+
+The data of fig.2 represents the scores that people rated their cat experiences during one instance of travel (x-axis) and how many times this score was selected (y-axis).
+
+```{r}
+library(tidyverse)
+logged_data <- read_csv("https://docs.google.com/spreadsheets/d/e/2PACX-1vQ3eSKCtfLyYWu9s8JLARrpgYJ4JtcAWCguupktDCNUIxWxsnsbjN4oLw9nNTVqgRBZgKl71zZTtKKj/pub?output=csv") 
+
+  latest_data <- logged_data %>%
+  rename(time_submitted = 1) %>%
+  rename(cat_experience_rating = 2) %>%
+  rename(number_of_cats = 3) %>%
+  rename(number_of_petted_cats = 4)
+  
+  ggplot(data = latest_data) +
+   geom_bar (aes(x = number_of_petted_cats), fill = "#B2C248") +
+     labs(title = "Fig.1 How many times were a unique amount of cats petted?",
+          subtitle = "And the amount of times that number of Unique cats were petted",
+          Caption = "Source: Residential Cat Spotting Study",
+          x = "number_of_petted_cats (0 or 0+)",
+          y = "amount of times")
+  
+  ggplot(data = latest_data) +
+   geom_bar (aes(x = cat_experience_rating), fill = "#442343") +
+     labs(title = "Fig.2 Cat Sighting/Encounter Enjoyability Rating", 
+          subtitle = "Ranging from 1 - 10",
+          Caption = "Source: Residential Cat Spotting Study",
+          x = "cat_experience_rating (1-10)",
+          y = "Number of Scores")
+  
+  cat_experience_rating <- latest_data$cat_experience_rating
+  
+  mean_score <- cat_experience_rating %>% mean() %>% round(2)
+  
+  amount_of_scores <- cat_experience_rating %>% length()
+  
+```
+
+After my data was collected, in order to  summarise two important details of my graphs, I have created dynamic phrases.
+Taking into account all of the cat interaction score ratings, the mean interaction score rating is <b>`r mean_score`</b> out of 10. 
+
+Tallying up all the submissions in the form I used for my investigation, <b>`r amount_of_scores`</b> score ratings were submitted.
+
+
+
+![](https://c.tenor.com/-qBsG1HwR4oAAAAC/tenor.gif)
