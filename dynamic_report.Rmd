@@ -61,9 +61,9 @@ logged_data <- read_csv("https://docs.google.com/spreadsheets/d/e/2PACX-1vQ3eSKC
 ```
 
 After my data was collected, in order to  summarise two important details of my graphs, I have created dynamic phrases.
-Taking into account all of the cat interaction score ratings, the mean interaction score rating is <b>`r mean_score`</b> out of 10. 
+Taking into account all of the cat interaction score ratings, the mean interaction score rating is **`r mean_score`** out of 10. 
 
-Tallying up all the submissions in the form I used for my investigation, <b>`r amount_of_scores`</b> score ratings were submitted.
+Tallying up all the submissions in the form I used for my investigation, **`r amount_of_scores`** score ratings were submitted.
 
 
 
